@@ -1,0 +1,39 @@
+{
+  "name": "pipe-through",
+  "version": "0.1.0",
+  "description": "A crossbreed of a pipeline and a maybe construct",
+  "main": "dist/index.js",
+  "scripts": {
+    "build": "tsc src/index.ts --outDir dist",
+    "prepublish": "npm run build"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/spatie/pipe-through.git"
+  },
+  "keywords": [
+    "spatie"
+  ],
+  "author": "Sebastian De Deyne",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/spatie/pipe-through/issues"
+  },
+  "homepage": "https://github.com/spatie/pipe-through",
+  "devDependencies": {
+    "@types/jest": "^19.2.3",
+    "jest": "^20.0.0",
+    "ts-jest": "^20.0.2",
+    "typescript": "^2.3.2"
+  },
+  "jest": {
+    "testRegex": "(/__tests__/.*|\\.(test))\\.(ts|js)$",
+    "moduleFileExtensions": [
+      "js",
+      "ts"
+    ],
+    "transform": {
+      "^.+\\.(js|ts)$": "<rootDir>/node_modules/ts-jest/preprocessor.js"
+    }
+  }
+}
