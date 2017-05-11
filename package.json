@@ -33,7 +33,7 @@
       "ts"
     ],
     "transform": {
-      "^.+\\.(js|ts)$": "<rootDir>/node_modules/ts-jest/preprocessor.js"
+      "^.+\\.ts$": "<rootDir>/node_modules/ts-jest/preprocessor.js"
     }
   }
 }
