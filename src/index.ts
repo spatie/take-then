@@ -42,8 +42,12 @@ export class Wrapper<T> {
         return this.value;
     }
 
-    log(): Wrapper<T> {
-        console.log(this.value);
+    log(message: string | null = null): Wrapper<T> {
+        if (message) {
+            console.log(this.message, this.value);
+        } else {
+            console.log(this.value);
+        }
         return this;
     }
 }

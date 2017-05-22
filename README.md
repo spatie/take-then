@@ -4,6 +4,21 @@
 [![Software License](https://img.shields.io/badge/license-MIT-brightgreen.svg?style=flat-square)](LICENSE.md)
 [![Build Status](https://img.shields.io/travis/spatie/take-then/master.svg?style=flat-square)](https://travis-ci.org/spatie/take-then)
 
+The `take` function allows you to perform a sequence of operations on any object without needing to create intermediate variables and without needing to worry about `null` or `undefined` values.
+
+```js
+import take from 'take-then';
+
+const fourthLetterInUpperCase = string =>
+    take(string)
+        .then(string => string.toUpperCase())
+        .then(string => string[3])
+        .withDefault(😢);
+
+fourthLetterInUpperCase('hello'); // 'L'
+fourthLetterInUpperCase('foo'); // '😢'
+```
+
 ## Postcardware
 
 You're free to use this package (it's [MIT-licensed](LICENSE.md)), but if it makes it to your production environment we highly appreciate you sending us a postcard from your hometown, mentioning which of our package(s) you are using.
@@ -22,18 +37,11 @@ yarn add take-then
 
 ## Usage
 
-```js
-import pipe from 'take-then';
+`take-then` exposes one function: `take`. The `take` function decorates an object so we can chain a series of operations on it.
 
-const fourthLetterInUpperCase = string =>
-    pipe(string)
-        .through(s => s.toUpperCase())
-        .through(s => s[3])
-        .withDefault(😢);
+The methods on the wrapped object are:
 
-fourthLetterInUpperCase('hello'); // 'L'
-fourthLetterInUpperCase('foo'); // '😢'
-```
+...
 
 ## Change log
 
