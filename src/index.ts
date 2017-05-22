@@ -1,21 +1,25 @@
-class Pipe<T> {
+export class Wrapper<T> {
     value: T
 
     constructor(value: T) {
-        this.value = value;
+        if (value === undefined) {
+            this.value = null;
+        } else {
+            this.value = value;
+        }
     }
 
-    through<U>(mapper: (subject: T) => U): Pipe<U> {
+    then<U>(mapper: (subject: T) => U): Wrapper<U> {
         if (this.isNothing()) {
             // In this case, we know `T` is null or undefined. To be able to
             // continue our pipeline while assuming a specific type, we need to
-            // cast the this method's return type to `Pipe<U>`. TypeScript won't
-            // let us cast `Pipe<T>` to `Pipe<U>`, so we'll cast to `any` first
+            // cast the this method's return type to `Wrapper<U>`. TypeScript won't
+            // let us cast `Wrapper<T>` to `Wrapper<U>`, so we'll cast to `any` first
             // as a workaround.
-            return this as any as Pipe<U>;
+            return this as any as Wrapper<U>;
         }
 
-        return new Pipe(mapper(this.value));
+        return new Wrapper(mapper(this.value));
     }
 
     withDefault<U>(fallback: U): T | U {
@@ -27,7 +31,7 @@ class Pipe<T> {
     }
 
     isSomething(): boolean {
-        return this.value !== null && this.value !== undefined;
+        return this.value !== null;
     }
 
     isNothing(): boolean {
@@ -38,12 +42,10 @@ class Pipe<T> {
         return this.value;
     }
 
-    log(): Pipe<T> {
+    log(): Wrapper<T> {
         console.log(this.value);
         return this;
     }
 }
 
-const pipe = <T>(subject: T) => new Pipe(subject);
-
-export default pipe;
+export default <T>(subject: T) => new Wrapper(subject);

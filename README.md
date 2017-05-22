@@ -1,8 +1,8 @@
 # A crossbreed of a pipeline and a maybe construct
 
-[![Latest Version on NPM](https://img.shields.io/npm/v/pipe-through.svg?style=flat-square)](https://npmjs.com/package/pipe-through)
+[![Latest Version on NPM](https://img.shields.io/npm/v/take-then.svg?style=flat-square)](https://npmjs.com/package/take-then)
 [![Software License](https://img.shields.io/badge/license-MIT-brightgreen.svg?style=flat-square)](LICENSE.md)
-[![Build Status](https://img.shields.io/travis/spatie/pipe-through/master.svg?style=flat-square)](https://travis-ci.org/spatie/pipe-through)
+[![Build Status](https://img.shields.io/travis/spatie/take-then/master.svg?style=flat-square)](https://travis-ci.org/spatie/take-then)
 
 ## Postcardware
 
@@ -14,16 +14,16 @@ The best postcards will get published on the open source page on our website.
 
 ## Install
 
-`pipe-through` can be installed with yarn or npm:
+`take-then` can be installed with yarn or npm:
 
 ```bash
-yarn add pipe-through
+yarn add take-then
 ```
 
 ## Usage
 
 ```js
-import pipe from 'pipe-through';
+import pipe from 'take-then';
 
 const fourthLetterInUpperCase = string =>
     pipe(string)
