@@ -44,7 +44,7 @@ export class Wrapper<T> {
 
     log(message: string | null = null): Wrapper<T> {
         if (message) {
-            console.log(this.message, this.value);
+            console.log(message, this.value);
         } else {
             console.log(this.value);
         }
