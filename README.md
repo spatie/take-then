@@ -37,13 +37,61 @@ yarn add take-then
 
 ## Usage
 
-`take-then` exposes one function: `take`. The `take` function decorates an object so we can chain a series of operations on it.
+`take-then` exposes one function: `take`. The `take` function decorates an object that lets us chain a series of operations on it.
 
 The methods on the wrapped object are:
 
+### `then(callback: (value: T) => U): Wrapper<U>`
+
+`then` performs an operation on the wrapped object if the object isn't `null` or `undefined`, and returns a new wrapped opject containing the transformed value.
+
+```js
+const object = take('foo').then(string => string.toUpperCase());
+```
+
+In the example, `object` contains `FOO` internally. Since `object` is a `Wrapper`, `then` calls can be chained.
+
+### `get(): T`
+
+Return the wrapped value.
+
+```js
+const value = take('foo')
+    .then(string => string.toUpperCase())
+    .get();
+```
+
+In the example, `value` equals "FOO".
+
+### `withDefault(fallback: U): T | U`
+
+Return the wrapped value, or the fallback if the wrapped value is `null` or `undefined`.
+
+```js
+const value = take(['a', 'b'])
+    .then(chars => chars[2])
+    .withDefault('z');
+```
+
+In the example, `value` equals "z", since `chars[2]` is `undefined`.
+
+### `isSomething(): boolean`
+
+Returns `true` if the wrapped value **isn't** `null` or `undefined`.
+
+### `isNothing(): boolean`
+
+Returns `true` if the wrapped value **is** `null` or `undefined`.
+
+### `log(message: string | null): Wrapper<T>`
+
+Log the value and (optionally) a message, and return the value in the wrapper. Useful for debugging chains.
+
+## Real world examples
+
 ...
 
-## Change log
+## Changelog
 
 Please see [CHANGELOG](CHANGELOG.md) for more information what has changed recently.
 
