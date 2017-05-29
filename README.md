@@ -39,7 +39,7 @@ yarn add take-then
 
 `take-then` exposes one function: `take`. The `take` function decorates an object that lets us chain a series of operations on it.
 
-The methods on the wrapped object are *(`T` is the types of the wrapped object)*:
+The methods on the wrapped object are *(`T` is the type of the wrapped object)*:
 
 ### `then(callback: (value: T) => U): Wrapper<U>`
 
