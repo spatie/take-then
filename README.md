@@ -119,7 +119,7 @@ const findRoleNameByUserName = name => {
 
 There are some issues here. If either the user or the role isn't found, we'll have runtime errors, since we'd be trying to retrieve a property from something `undefined` (`user.role` and `role.name` are the dangerous parts here).
 
-We can avoid this with an early return. Let's return an empty string in this case, since we're expecting a string in the first place.
+We can avoid this with a early returns. Let's return an empty string in this case, since we're expecting a string in the first place.
 
 ```js
 const findRoleNameByUserName = name => {
