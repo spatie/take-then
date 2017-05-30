@@ -150,7 +150,7 @@ const findRoleNameByUserName = name =>
         .withDefault('');
 ```
 
-Voila! We can make this even more readable by splitting our pipeline into bite-sized pieces instead of a chain of anonymous functions.
+Voila! Our chain won't throw any runtime errors, and if our value became `null` or `undefined` at any part, we'll return an empty string instead. We can make this even more readable by splitting our pipeline into bite-sized pieces instead of a chain of anonymous functions.
 
 ```js
 const findUserByName = name => users.find(u => u.name === name);
