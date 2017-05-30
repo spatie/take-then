@@ -89,7 +89,7 @@ Log the value and (optionally) a message, and return the value in the wrapper. U
 
 ## Real world refactoring example
 
-`take-then` is great for refactoring processes with intermediate `null` checks into a clean & composable pipeline.
+`take-then` is great for refactoring processes with intermediate `null` or `undefined` checks into a clean & composable pipeline.
 
 Consider a case where we want to retrieve a user's role by passing the user's name. Roles are object stored in a different array. Here's our setup:
 
