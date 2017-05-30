@@ -119,7 +119,7 @@ const findRoleNameByUserName = name => {
 
 There are some issues here. If either the user or the role isn't found, we'll have runtime errors, since we'd be trying to retrieve a property from something `undefined` (`user.role` and `role.name` are the dangerous parts here).
 
-We can avoid this with a early returns. Let's return an empty string in this case, since we're expecting a string in the first place.
+We can avoid this with early returns. Let's return an empty string in this case, since we're expecting a string in the first place.
 
 ```js
 const findRoleNameByUserName = name => {
@@ -139,7 +139,7 @@ const findRoleNameByUserName = name => {
 };
 ```
 
-Our code works, but it's not the prettiest thing... Time to refactor this to a single statement with `take-then`! Since `take-then` avoids calling a function when the wrapped object is `null` or `undefined`, we don't need to worry about those checks anymore—without reintroducing potential runtime errors of course.
+Our code works, but it's not the prettiest thing... Time to refactor this to a single statement with `take-then`! Since `take-then` avoids calling a function when the wrapped object is `null` or `undefined`, we don't need to worry about those checks anymore—without reintroducing the potential runtime errors.
 
 ```js
 const findRoleNameByUserName = name =>
