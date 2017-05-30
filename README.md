@@ -104,10 +104,6 @@ const roles = [
     { id: 1, name: 'Developer' },
     { id: 2, name: 'Designer' },
 ];
-
-const findUserByName = name => users.find(u => u.name === name);
-
-const findRoleById = id => roles.find(r => r.id === id);
 ```
 
 Now for our first implementation.
