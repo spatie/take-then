@@ -87,9 +87,86 @@ Returns `true` if the wrapped value **is** `null` or `undefined`.
 
 Log the value and (optionally) a message, and return the value in the wrapper. Useful for debugging chains.
 
-## Real world examples
+## Real world refactoring example
 
-...
+`take-then` is great for refactoring processes with intermediate `null` checks into a clean & composable pipeline.
+
+Consider a case where we want to retrieve a user's role by passing the user's name. Roles are object stored in a different array. Here's our setup:
+
+```js
+const users = [
+    { id: 1, name: 'Sebastian', role: 1 },
+    { id: 2, name: 'Freek', role: 1 },
+    { id: 3, name: 'Willem', role: 2 },
+];
+
+const roles = [
+    { id: 1, name: 'Developer' },
+    { id: 2, name: 'Designer' },
+];
+
+const findUserByName = name => users.find(u => u.name === name);
+
+const findRoleById = id => roles.find(r => r.id === id);
+```
+
+Now for our first implementation.
+
+```js
+const findRoleNameByUserName = name => {
+    const user = users.find(u => u.name === name);
+    const role = roles.find(r => r.id === user.role);
+
+    return role.name;
+};
+```
+
+There are some issues here. If either the user or the role isn't found, we'll have runtime errors, since we'd be trying to retrieve a property from something `undefined` (`user.role` and `role.name` are the dangerous parts here).
+
+We can avoid this with an early return. Let's return an empty string in this case, since we're expecting a string in the first place.
+
+```js
+const findRoleNameByUserName = name => {
+    const user = users.find(u => u.name === name);
+
+    if (! user) {
+        return '';
+    }
+
+    const role = roles.find(r => r.id === user.role);
+
+    if (! role) {
+        return '';
+    }
+
+    return role.name;
+};
+```
+
+Our code works, but it's not the prettiest thing... Time to refactor this to a single statement with `take-then`! Since `take-then` avoids calling a function when the wrapped object is `null` or `undefined`, we don't need to worry about those checks anymore—without reintroducing potential runtime errors of course.
+
+```js
+const findRoleNameByUserName = name =>
+    take(name)
+        .then(name => users.find(u => u.name === name))
+        .then(user => roles.find(r => r.id === user.role))
+        .then(role => role.name)
+        .withDefault('');
+```
+
+Voila! We can make this even more readable by splitting our pipeline into bite-sized pieces instead of a chain of anonymous functions.
+
+```js
+const findUserByName = name => users.find(u => u.name === name);
+const findRoleForUser = user => roles.find(r => r.id === user.role);
+
+const findRoleNameByUserName = name =>
+    take(name)
+        .then(findUserByName)
+        .then(findRoleForUser)
+        .then(role => role.name)
+        .withDefault('');
+```
 
 ## Changelog
 
@@ -107,7 +184,7 @@ Please see [CONTRIBUTING](CONTRIBUTING.md) for details.
 
 ## Security
 
-If you discover any security related issues, please contact [Sebastian De Deyne](https://github.com/sebastiandedeyne) instead of using the issue tracker.
+If you discover any security related issues, please contact [Freek Van der Herten](https://github.com/freekmurze) instead of using the issue tracker.
 
 ## Credits
 
